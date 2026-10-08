@@ -1,0 +1,48 @@
+const ipoData = [
+  {
+    id: 1,
+    company: "TechNova Solutions",
+    symbol: "TECHNOVA",
+    priceRange: "₹450 - ₹475",
+    lotSize: 30,
+    openDate: "10 Oct 2026",
+    closeDate: "14 Oct 2026",
+    status: "Open",
+    subscription: "12.45x",
+  },
+  {
+    id: 2,
+    company: "FinEdge Technologies",
+    symbol: "FINEDGE",
+    priceRange: "₹280 - ₹295",
+    lotSize: 50,
+    openDate: "15 Oct 2026",
+    closeDate: "17 Oct 2026",
+    status: "Upcoming",
+    subscription: "—",
+  },
+  {
+    id: 3,
+    company: "GreenPower Energy",
+    symbol: "GREENPOWER",
+    priceRange: "₹620 - ₹650",
+    lotSize: 20,
+    openDate: "05 Oct 2026",
+    closeDate: "08 Oct 2026",
+    status: "Closed",
+    subscription: "8.72x",
+  },
+  {
+    id: 4,
+    company: "CloudMatrix Systems",
+    symbol: "CLOUDMAT",
+    priceRange: "₹520 - ₹545",
+    lotSize: 25,
+    openDate: "18 Oct 2026",
+    closeDate: "21 Oct 2026",
+    status: "Upcoming",
+    subscription: "—",
+  },
+];
+
+export default ipoData;
