@@ -1,3 +1,4 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -6,10 +7,10 @@ export default defineConfig({
 
   server: {
     proxy: {
-      "/api": {
+      "/api/ipos": {
         target: "https://www.xflot.com",
         changeOrigin: true,
-        secure: true,
+        rewrite: () => "/api/public/market/ipos",
       },
     },
   },
