@@ -1,4 +1,5 @@
-const API_URL = "/api/public/market/ipos";
+
+const API_URL = "https://www.xflot.com/api/public/market/ipos";
 
 export async function getIPOs() {
   try {
@@ -6,7 +7,7 @@ export async function getIPOs() {
 
     if (!response.ok) {
       throw new Error(
-        `API Error: ${response.status}`
+        `IPO API request failed: ${response.status} ${response.statusText}`
       );
     }
 
@@ -14,15 +15,20 @@ export async function getIPOs() {
 
     console.log("IPO API Response:", result);
 
+    // Handle different API response formats
     const ipos = Array.isArray(result)
       ? result
-      : result.data || result.ipos || [];
+      : Array.isArray(result?.data)
+        ? result.data
+        : Array.isArray(result?.ipos)
+          ? result.ipos
+          : [];
 
     return ipos.map((ipo, index) => ({
       id:
-        ipo.id ||
-        ipo.slug ||
-        `${ipo.symbol || ipo.name}-${index}`,
+        ipo.id ??
+        ipo.slug ??
+        `${ipo.symbol || ipo.name || "ipo"}-${index}`,
 
       company:
         ipo.company ||
@@ -42,13 +48,15 @@ export async function getIPOs() {
       priceRange:
         ipo.priceBand ||
         ipo.price_range ||
-        (ipo.minPrice && ipo.maxPrice
-          ? `₹${ipo.minPrice} - ₹${ipo.maxPrice}`
-          : "-"),
+        (
+          ipo.minPrice != null && ipo.maxPrice != null
+            ? `₹${ipo.minPrice} - ₹${ipo.maxPrice}`
+            : "-"
+        ),
 
       lotSize:
-        ipo.lotSize ||
-        ipo.lot_size ||
+        ipo.lotSize ??
+        ipo.lot_size ??
         "-",
 
       openDate:
@@ -69,13 +77,13 @@ export async function getIPOs() {
         "-",
 
       subscription:
-        ipo.subscription ||
-        ipo.subscriptionRate ||
+        ipo.subscription ??
+        ipo.subscriptionRate ??
         "-",
 
       issueSize:
-        ipo.issueSize ||
-        ipo.issue_size ||
+        ipo.issueSize ??
+        ipo.issue_size ??
         "-",
 
       board:
@@ -84,14 +92,16 @@ export async function getIPOs() {
         "-",
 
       gmp:
-        ipo.gmp ||
-        "-",
+        ipo.gmp ?? "-",
 
       rawData: ipo,
     }));
   } catch (error) {
-    throw new Error("Unable to fetch IPO data", {
-      cause: error,
-    });
+    console.error("Failed to fetch IPO data:", error);
+
+    throw new Error(
+      `Unable to fetch IPO data: ${error.message}`,
+      { cause: error }
+    );
   }
 }
