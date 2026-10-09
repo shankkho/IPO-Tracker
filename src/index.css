@@ -1,17 +1,53 @@
 body {
+  background-color: #f8f9fa;
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
 }
 
-.card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.navbar {
+  min-height: 64px;
 }
 
-.card:hover {
+.dashboard-hero {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card {
+  border-radius: 14px;
+  transition: 0.2s ease;
+}
+
+.stat-card:hover {
   transform: translateY(-4px);
 }
 
-.navbar-brand {
-  letter-spacing: 0.5px;
+.stat-icon {
+  font-size: 30px;
+}
+
+.ipo-card {
+  border-radius: 14px;
+  transition: 0.2s ease;
+}
+
+.ipo-card:hover {
+  transform: translateY(-5px);
+}
+
+.card {
+  border-radius: 14px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
 }

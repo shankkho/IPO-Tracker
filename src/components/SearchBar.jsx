@@ -1,12 +1,16 @@
-function SearchBar({ search, setSearch }) {
+function SearchBar({ value, onChange }) {
   return (
-    <div className="mb-4">
+    <div className="input-group mb-4">
+      <span className="input-group-text">
+        🔍
+      </span>
+
       <input
         type="text"
-        className="form-control form-control-lg"
-        placeholder="Search IPO or company..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        className="form-control"
+        placeholder="Search company or symbol..."
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   );
